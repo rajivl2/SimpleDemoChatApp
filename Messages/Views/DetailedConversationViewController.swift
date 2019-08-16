@@ -32,7 +32,7 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
         btn.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         btn.setTitleColor(.black, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        btn.layer.cornerRadius = 3.0
+        btn.layer.cornerRadius = 8.0
         return btn
     }()
     
@@ -48,9 +48,9 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
         
         self.navigationItem.title = messages?.contactName
@@ -63,7 +63,7 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
         myTableView.accessibilityIdentifier = "Detailed Table View"
         
         myTableView.rowHeight = 70.0
-        myTableView.backgroundColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        myTableView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         
         self.view.addSubview(myTableView)
         
@@ -105,13 +105,10 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
     // MARK: - Table view data source
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
         return messages?.textMessages.count ?? 0
     }
     
@@ -119,6 +116,10 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath) as? DetailedConversationTableViewCell else {
             fatalError()
         }
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        cell.selectedBackgroundView = bgColorView
+        
         let from = messages?.textMessages[indexPath.row].from ?? false
         cell.message.text = messages?.textMessages[indexPath.row].textMessages
         cell.time.text = messages?.textMessages[indexPath.row].timeStamp

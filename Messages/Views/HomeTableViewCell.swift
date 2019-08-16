@@ -29,18 +29,15 @@ class HomeTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         accessibilityIdentifier = "Home Cell"
         setUpViews()
     }

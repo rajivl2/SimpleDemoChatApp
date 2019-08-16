@@ -17,16 +17,13 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         
         tableView.accessibilityIdentifier = "Home Table View"
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.navigationItem.title = "Messages"
@@ -41,20 +38,18 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
-        self.view.backgroundColor = UIColor(red: 140/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return users.count
     }
 
@@ -63,8 +58,11 @@ class HomeTableViewController: UITableViewController {
             fatalError()
         }
 
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        cell.selectedBackgroundView = bgColorView
+        
         cell.nameLabel.text = users[indexPath.row].contactName
-        //cell.lastMessageLabel.text = users[indexPath.row].textMessages.toMessages[users[indexPath.row].textMessages.toMessages.count-1]
         cell.lastMessageLabel.text = users[indexPath.row].textMessages[users[indexPath.row].textMessages.count-1].textMessages
         
         return cell
@@ -72,6 +70,13 @@ class HomeTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.moveToDetailedMessageView(message: users[indexPath.row])
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            users.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     func sortTextMessages(){
