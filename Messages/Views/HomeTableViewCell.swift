@@ -37,7 +37,7 @@ class HomeTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.backgroundColor = UIColor(white: 0.95, alpha: 1)
         accessibilityIdentifier = "Home Cell"
         setUpViews()
     }

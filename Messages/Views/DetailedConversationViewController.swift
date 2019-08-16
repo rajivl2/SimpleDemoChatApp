@@ -48,9 +48,9 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
         
         self.navigationItem.title = messages?.contactName
@@ -62,8 +62,9 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
         
         myTableView.accessibilityIdentifier = "Detailed Table View"
         
-        myTableView.rowHeight = 70.0
-        myTableView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        //myTableView.rowHeight = 70.0
+        myTableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        myTableView.separatorStyle = .none
         
         self.view.addSubview(myTableView)
         
@@ -117,20 +118,10 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
             fatalError()
         }
         let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        bgColorView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         cell.selectedBackgroundView = bgColorView
         
-        let from = messages?.textMessages[indexPath.row].from ?? false
-        cell.message.text = messages?.textMessages[indexPath.row].textMessages
-        cell.time.text = messages?.textMessages[indexPath.row].timeStamp
-        
-        if from {
-            cell.message.textAlignment = .left
-            cell.time.textAlignment = .left
-        } else {
-            cell.message.textAlignment = .right
-            cell.time.textAlignment = .right
-        }
+        cell.chatMessage = messages?.textMessages[indexPath.row]
         
         return cell
     }

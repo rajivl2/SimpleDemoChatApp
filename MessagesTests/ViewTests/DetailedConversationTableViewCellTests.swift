@@ -24,6 +24,8 @@ class DetailedConversationTableViewCellTests: XCTestCase {
         XCTAssertNotNil(utility.findUILabelWithAccessibilityIdentifierForView(view: homeVC, accIdentifier: "message"))
         
         XCTAssertNotNil(utility.findUILabelWithAccessibilityIdentifierForView(view: homeVC, accIdentifier: "time"))
+        
+        XCTAssertNotNil(utility.findUIViewWithAccessibilityIdentifierForView(view: homeVC, accIdentifier: "chatBox"))
     }
     
 }

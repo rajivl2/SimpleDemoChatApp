@@ -73,4 +73,13 @@ class UtilityMethods{
         }
         return nil
     }
+    
+    func findUIViewWithAccessibilityIdentifierForView(view: UIView, accIdentifier: String) -> UIView?{
+        for subview in view.subviews{
+            if subview.accessibilityIdentifier == accIdentifier {
+                return view
+            }
+        }
+        return nil
+    }
 }

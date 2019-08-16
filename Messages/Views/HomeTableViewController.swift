@@ -17,16 +17,18 @@ class HomeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
         tableView.accessibilityIdentifier = "Home Table View"
         
-        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
 
         self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         self.navigationItem.title = "Messages"
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: "cell")
         
@@ -38,9 +40,9 @@ class HomeTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.barTintColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
-        self.view.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
     }
 
     // MARK: - Table view data source
@@ -59,7 +61,7 @@ class HomeTableViewController: UITableViewController {
         }
 
         let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        bgColorView.backgroundColor = UIColor(white: 0.95, alpha: 1)
         cell.selectedBackgroundView = bgColorView
         
         cell.nameLabel.text = users[indexPath.row].contactName
