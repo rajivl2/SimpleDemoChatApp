@@ -29,7 +29,7 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
     private let sendButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("Send", for: .normal)
-        btn.backgroundColor = UIColor(red: 100/255, green: 160/255, blue: 140/255, alpha: 1)
+        btn.backgroundColor = .clear
         btn.setTitleColor(.black, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         btn.layer.cornerRadius = 8.0
@@ -75,19 +75,24 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
             make.bottom.equalToSuperview().offset(-100)
         }
         
-        self.view.addSubview(typedMessage)
-        typedMessage.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            make.height.equalTo(80)
-            make.right.equalToSuperview().offset(-150)
-            make.bottom.equalToSuperview().offset(-20)
-        }
-        
         self.view.addSubview(sendButton)
         sendButton.snp.makeConstraints { (make) in
             make.top.equalTo(myTableView.snp.bottom).offset(20)
-            make.left.equalTo(typedMessage.snp.right).offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
+        
+        self.view.addSubview(typedMessage)
+        typedMessage.snp.makeConstraints { (make) in
+            make.height.equalTo(80)
+            make.right.equalTo(sendButton.snp.left).offset(-20)
+            make.width.equalTo(300)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+        
+        addDoneButtonOnKeyboard()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         sendButton.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
     }
@@ -100,6 +105,9 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
             let newMessage = TextMessages(from: false, to: true, textMessages: newText, timeStamp: "now")
             self.messages?.textMessages.append(newMessage)
         }
+        
+        typedMessage.text = ""
+        
         myTableView.reloadData()
     }
     
@@ -124,5 +132,36 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
         cell.chatMessage = messages?.textMessages[indexPath.row]
         
         return cell
+    }
+    
+    func addDoneButtonOnKeyboard(){
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = .default
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        
+        let items = [flexSpace, done]
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        typedMessage.inputAccessoryView = doneToolbar
+    }
+    
+    @objc func doneButtonAction(){
+        typedMessage.resignFirstResponder()
+    }
+    
+    @objc func keyboardWillHide() {
+        self.view.frame.origin.y = 0
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if typedMessage.isFirstResponder {
+                self.view.frame.origin.y = -keyboardSize.height
+            }
+        }
     }
 }

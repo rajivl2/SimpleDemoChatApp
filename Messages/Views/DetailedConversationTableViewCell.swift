@@ -92,5 +92,4 @@ class DetailedConversationTableViewCell: UITableViewCell {
             make.right.equalToSuperview().offset(-15)
         }
     }
-
 }

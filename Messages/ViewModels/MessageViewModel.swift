@@ -26,8 +26,15 @@ class MessageViewModel{
         let jonMessages1 = TextMessages(from: true, to: false, textMessages: "Hi, Are you coming today ?", timeStamp: "Tue, 14 Aug 2019 09:26:19")
         let jonMessages2 = TextMessages(from: false, to: true, textMessages: "Hi", timeStamp: "Tue, 13 Aug 2019 09:30:19")
         let jonMessages3 = TextMessages(from: false, to: true, textMessages: "Yes. I will be there !", timeStamp: "Tue, 13 Aug 2019 09:55:19")
+        let jonMessages4 = TextMessages(from: false, to: true, textMessages: "Please read the article below for today's test.", timeStamp: "Tue, 13 Aug 2019 09:57:19")
+        let jonMessages5 = TextMessages(from: false, to: true, textMessages: "Why do we use Coordinator? - Each independent FLOW should have its own coordinator. Each coordinator (generally) holds a Router class to control the presentation. Pushing view controllers from other view controllers prevents UIViewController classes from acting independently.", timeStamp: "Tue, 13 Aug 2019 09:55:19")
+        let jonMessages6 = TextMessages(from: true, to: false, textMessages: "ok. Got it. Thanks for sharing.", timeStamp: "Tue, 13 Aug 2019 09:59:19")
+        let jonMessages7 = TextMessages(from: false, to: true, textMessages: "You are welcome !", timeStamp: "Tue, 13 Aug 2019 10:05:19")
+        let jonMessages8 = TextMessages(from: true, to: false, textMessages: "To add here - View controllers have a lot of responsibilities already! It's not just the massive view controller problem; it requires significant setup and dependency injection to properly test a view controller that holds multiple responsibilities.", timeStamp: "Tue, 13 Aug 2019 10:30:19")
         
-        let jon = MessageContacts(contactName: "Jon", textMessages: [jonMessages1,jonMessages2,jonMessages3])
+        let jonMessages9 = TextMessages(from: false, to: true, textMessages: "Correct !", timeStamp: "Tue, 13 Aug 2019 10:55:19")
+        
+        let jon = MessageContacts(contactName: "Jon", textMessages: [jonMessages1,jonMessages2,jonMessages3,jonMessages4,jonMessages5,jonMessages6,jonMessages7,jonMessages8,jonMessages9])
         
         self.users.append(jon)
         

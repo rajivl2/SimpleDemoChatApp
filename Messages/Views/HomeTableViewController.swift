@@ -20,6 +20,7 @@ class HomeTableViewController: UITableViewController {
         self.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
         tableView.accessibilityIdentifier = "Home Table View"
+        tableView.separatorStyle = .none
         
         navigationController?.navigationBar.barTintColor = UIColor(white: 0.95, alpha: 1)
         navigationController?.navigationBar.tintColor = UIColor.black
