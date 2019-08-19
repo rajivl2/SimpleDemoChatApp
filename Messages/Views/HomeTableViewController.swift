@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class HomeTableViewController: UITableViewController {
 
@@ -89,8 +90,12 @@ class HomeTableViewController: UITableViewController {
     func getUserInformation(){
         
         let messageViewModel = MessageViewModel()
-        self.users = messageViewModel.getMessagedetails()
         
+        if let savedMessages = messageViewModel.loadMessages() {
+            self.users += savedMessages
+        } else {
+            self.users = messageViewModel.getMessagedetails()
+        }
     }
     
 }

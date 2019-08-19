@@ -14,7 +14,7 @@ class DetailedConversationTableViewCell: UITableViewCell {
         didSet{
             bubbleBackgroundView.backgroundColor = chatMessage.from ? .green : .white
             message.text = chatMessage.textMessages
-            time.text = chatMessage.timeStamp
+            time.text = chatMessage.timeOfTextMessage
             message.numberOfLines = 0
             message.textAlignment = chatMessage.from ? .left : .right
             time.textAlignment = chatMessage.from ? .left : .right

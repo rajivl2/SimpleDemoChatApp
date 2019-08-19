@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import os.log
 
 class DetailedConversationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private var messages: MessageContacts?
     private var myTableView: UITableView!
+    
+    let viewModel = MessageViewModel()
     
     private let typedMessage: UITextField = {
         let text = UITextField()
@@ -102,13 +105,29 @@ class DetailedConversationViewController: UIViewController, UITableViewDelegate,
             return
         }
         if newText != "" {
-            let newMessage = TextMessages(from: false, to: true, textMessages: newText, timeStamp: "now")
+            let nowTimeStamp = self.getCurrentTimeStampWithDesiredFormat()
+            let newMessage = TextMessages(from: false, to: true, textMessages: newText, timeOfTextMessage: nowTimeStamp)
             self.messages?.textMessages.append(newMessage)
+            viewModel.saveMessages(messages: self.messages!)
         }
         
         typedMessage.text = ""
         
         myTableView.reloadData()
+    }
+    
+    func getCurrentTimeStampWithDesiredFormat() -> String {
+        let now = Date()
+        
+        let formatter = DateFormatter()
+        
+        formatter.timeZone = TimeZone.current
+        
+        formatter.dateFormat = "MMM d, h:mm:ss a"
+        formatter.locale = Locale(identifier: "en_US")
+        
+        let dateString = formatter.string(from: now)
+        return dateString
     }
     
     // MARK: - Table view data source
